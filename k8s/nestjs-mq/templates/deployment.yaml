@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: nestjs-mq
+  name: nestjs-mq
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: nestjs-mq
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: nestjs-mq
+    spec:
+      containers:
+        - image: brian090/nestjs-mq
+          name: nestjs-mq
+          env:
+            - name: REDIS_HOST
+              value: nestjs-mq-redis-master
+            - name: REDIS_PORT
+              value: '6379'
+          ports:
+            - containerPort: 3000
+          resources: {}
+status: {}
